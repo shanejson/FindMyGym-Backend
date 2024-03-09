@@ -23,18 +23,21 @@ import java.util.logging.Logger;
 @AllArgsConstructor
 
 public class fit4lessCrawler {
-   // private final Logger logger = (Logger) LoggerFactory.getLogger(fit4lessCrawler.class);
-    public void getFit4lessDetails(String provinceName, String cityName) throws InterruptedException{
 
-        System.out.println("Province: " + provinceName);
-        System.out.println("City: " + cityName);
+    public void getFit4lessPricing(){
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://www.fit4less.ca/membership");
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().window().maximize();
+
+    }
+
+    public void getFit4lessDetails(String provinceName, String cityName) throws InterruptedException{
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.fit4less.ca/locations");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
 
-
-        System.out.println("-----");
         //Province Selection
         driver.findElement(By.id("province-dropdown")).click();
         Thread.sleep(1000);
@@ -42,7 +45,6 @@ public class fit4lessCrawler {
         Actions actions = new Actions(driver);
         actions.scrollToElement(dropdownElement).perform();
         dropdownElement.click();
-
 
         //City Selection
         driver.findElement(By.id("city-dropdown")).click();

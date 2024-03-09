@@ -12,6 +12,7 @@ public class Crawler_Controller {
 
     @GetMapping("/fit4lessCrawl")
     public String fit4lessCrawl() throws InterruptedException{
+        //fit4lessCrawler.getFit4lessPricing();
         fit4lessCrawler.getFit4lessDetails("Ontario", "Windsor");
         return "Crawl Completed";
     }
