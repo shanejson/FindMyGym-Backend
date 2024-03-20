@@ -23,16 +23,8 @@ import java.util.logging.Logger;
 @AllArgsConstructor
 
 public class fit4lessCrawler {
-
-    public void getFit4lessPricing(){
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://www.fit4less.ca/membership");
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
-
-    }
-
     public void getFit4lessDetails(String provinceName, String cityName) throws InterruptedException{
+        System.out.println("Crawling Fit4Less.....");
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.fit4less.ca/locations");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -41,7 +33,7 @@ public class fit4lessCrawler {
         //Province Selection
         driver.findElement(By.id("province-dropdown")).click();
         Thread.sleep(1000);
-        WebElement dropdownElement = driver.findElement(By.cssSelector("#province-dropdown > ul > li[data-provname=\"Alberta\"]"));
+        WebElement dropdownElement = driver.findElement(By.cssSelector("#province-dropdown > ul > li[data-provname=\"Ontario\"]"));
         Actions actions = new Actions(driver);
         actions.scrollToElement(dropdownElement).perform();
         dropdownElement.click();
@@ -49,13 +41,13 @@ public class fit4lessCrawler {
         //City Selection
         driver.findElement(By.id("city-dropdown")).click();
         Thread.sleep(1000);
-        WebElement cityElement = driver.findElement(By.cssSelector("#city-dropdown > ul > li[data-cityname=\"Edmonton\"]"));
+        WebElement cityElement = driver.findElement(By.cssSelector("#city-dropdown > ul > li[data-cityname=\"Brampton\"]"));
         actions.scrollToElement(cityElement).perform();
         cityElement.click();
 
         //Find Button
         driver.findElement(By.xpath("//*[@id=\"btn-find-your-gym\"]")).click();
-
+        Thread.sleep(1000);
         //Add gym location URLs
         List<String> availableGymLinks = new ArrayList<>();
 
@@ -105,6 +97,6 @@ public class fit4lessCrawler {
 
 
 
-
+        driver.close();
     }
 }
