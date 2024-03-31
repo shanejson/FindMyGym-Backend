@@ -38,6 +38,7 @@ public class FindMyGymBackendApplication {
 //		List<String> suggestedWords = feature.autoComplete("win");
 //		System.out.println(suggestedWords);
 
+		/// just for git
 
 		boolean continueLoop = true;
 //
