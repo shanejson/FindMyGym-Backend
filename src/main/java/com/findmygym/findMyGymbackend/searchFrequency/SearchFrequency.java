@@ -2,11 +2,12 @@ package com.findmygym.findMyGymbackend.searchFrequency;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.util.*;
 
 public class SearchFrequency {
     public void searchFrequency(String userInput){
-        File outputFile = new File("word_list.txt");
+        //File outputFile = new File("C:\\Users\\banwa\\OneDrive\\Desktop\\ACC\\Final Project\\Spell checker.txt");
+        File outputFile = new File("inputRecords.txt");
 
         if(outputFile.exists()) {
             // Reading from a text file
@@ -22,12 +23,14 @@ public class SearchFrequency {
                 return;
             }
 
-            String searchWord = userInput.toLowerCase(); // Convert input to lowercase
-            int frequency = search(searchWord);
-            System.out.println("The word '" + searchWord + "' appears " + frequency + " times in the list.");
+            //String searchWord = userInput.toLowerCase(); // Convert input to lowercase
+            //int frequency = search(searchWord);
+            //System.out.println("The word '" + searchWord + "' appears " + frequency + " times in the list.");
 
+            // Display top 10 frequencies
+            displayTopFrequencies();
         }else{
-            System.out.println("Words List Does Not Exist!");
+            System.out.println("User input record does not exist!");
         }
     }
 
@@ -93,4 +96,49 @@ public class SearchFrequency {
         }
         return curr.frequency;
     }
+
+    static void displayTopFrequencies() {
+        List<Map.Entry<String, Integer>> frequencyList = new ArrayList<>();
+        collectFrequencies(root, "", frequencyList);
+
+        // Sort the list by frequency in descending order
+        frequencyList.sort((a, b) -> b.getValue().compareTo(a.getValue()));
+
+        // Display top 10 frequencies
+        System.out.println("\nTop 10 Frequencies:");
+        int count = 0;
+        for (Map.Entry<String, Integer> entry : frequencyList) {
+            if (count < 10) {
+                System.out.println(capitalizeFirstLetter(entry.getKey()) + ": " + entry.getValue());
+                count++;
+            } else {
+                break;
+            }
+        }
+    }
+
+    static void collectFrequencies(TrieNode node, String word, List<Map.Entry<String, Integer>> frequencyList) {
+        if (node == null)
+            return;
+        if (node.isEndOfWord) {
+            frequencyList.add(new AbstractMap.SimpleEntry<>(word, node.frequency));
+        }
+        for (int i = 0; i < node.children.length; i++) {
+            char ch = (char) (i < 26 ? i + 'a' : (i < 52 ? i - 26 + 'A' : i - 52 + '0'));
+            collectFrequencies(node.children[i], word + ch, frequencyList);
+        }
+    }
+
+    public static void main(String[] args) {
+        SearchFrequency searchFrequency = new SearchFrequency();
+        searchFrequency.searchFrequency("");//Empty string is passed to skip the word search
+    }
+
+    private static String capitalizeFirstLetter(String word) {
+        if (word == null || word.isEmpty()) {
+            return word;
+        }
+        return Character.toUpperCase(word.charAt(0)) + word.substring(1);
+    }
 }
+

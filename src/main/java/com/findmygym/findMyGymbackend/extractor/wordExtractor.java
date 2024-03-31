@@ -123,4 +123,28 @@ public class wordExtractor {
 
         System.out.println("Province and city details have been extracted and stored in province_city_details.txt");
     }
+
+    public static void storeUserSearches(String userInput) throws IOException {
+        //Check if file exists
+        File file = new File("inputRecords.txt");
+        if(!file.exists()){
+            file.createNewFile();
+        }
+
+        //Access file
+        FileWriter fileWriter = new FileWriter(file, true);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        PrintWriter printWriter = new PrintWriter(bufferedWriter);
+
+        // Read user input
+        printWriter.println(userInput.toLowerCase());
+
+        System.out.println("User Input written.");
+
+        // Close resources
+        printWriter.close();
+        bufferedWriter.close();
+        fileWriter.close();
+
+    }
 }

@@ -32,7 +32,7 @@ public class WordCounter {
             displayMostFrequentWords(wordFrequencyMap);
 
             // Display lexical richness
-            displayLexicalRichness(wordFrequencyMap);
+            //displayLexicalRichness(wordFrequencyMap);
 
         }else{
             System.out.println("province_city_details Does Not Exists!");
@@ -83,13 +83,13 @@ public class WordCounter {
                 .forEach(entry -> System.out.println(capitalizeFirstLetter(entry.getKey() + ": " + entry.getValue())));
     }
 
-    private static void displayLexicalRichness(Map<String, Integer> wordFrequencyMap) {
-        int totalWords = wordFrequencyMap.values().stream().mapToInt(Integer::intValue).sum();
-        int uniqueWords = wordFrequencyMap.size();
-
-        double lexicalRichness = (double) uniqueWords / totalWords;
-        System.out.println("\nLexical Richness: " + lexicalRichness);
-    }
+//    private static void displayLexicalRichness(Map<String, Integer> wordFrequencyMap) {
+//        int totalWords = wordFrequencyMap.values().stream().mapToInt(Integer::intValue).sum();
+//        int uniqueWords = wordFrequencyMap.size();
+//
+//        double lexicalRichness = (double) uniqueWords / totalWords;
+//        System.out.println("\nLexical Richness: " + lexicalRichness);
+//    }
 
     private static String capitalizeFirstLetter(String word) {
         if (word == null || word.isEmpty()) {

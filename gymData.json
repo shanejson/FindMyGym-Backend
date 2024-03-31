@@ -1017,5 +1017,302 @@
       "Tanning",
       "Wi-Fi"
     ]
+  },
+  {
+    "membershipName": "4Less Card",
+    "membershipPrice": "7.99",
+    "membershipDuration": "Every 2 Weeks*",
+    "ID": "b7b07d87-de89-426f-90b6-836c7154d8e1",
+    "gym": "Fit4Less",
+    "province": "Ontario",
+    "city": "Mississauga",
+    "GymLocationNameElement": "Mississauga Bristol Road",
+    "GymLocationAddressElement": "60 Bristol Road East, Mississauga, ON - L4Z 3K8",
+    "GymLocationPhoneElement": "(905) 507-8223",
+    "GymPinLocationElement": "https://www.google.ca/maps/dir//Fit4Less+60 Bristol Road East,Mississauga/@43.616089,-79.660726",
+    "GymAmenitiesArrayList": [
+      "Black Card Workout Area",
+      "Showers",
+      "Tanning",
+      "Hydro Massage Beds",
+      "Massage Chairs",
+      "Red Light Therapy",
+      "Wi-Fi"
+    ]
+  },
+  {
+    "membershipName": "4Less Card",
+    "membershipPrice": "7.99",
+    "membershipDuration": "Every 2 Weeks*",
+    "ID": "1f422d12-f16e-4d69-9796-1eead7756f15",
+    "gym": "Fit4Less",
+    "province": "Ontario",
+    "city": "Mississauga",
+    "GymLocationNameElement": "Grand Park Drive - Opening soon!",
+    "GymLocationAddressElement": "3900 Grand Park Drive, Mississauga, ON -",
+    "GymLocationPhoneElement": "Get directions to this gym",
+    "GymPinLocationElement": "",
+    "GymAmenitiesArrayList": [
+      "Tanning",
+      "Hydro Massage Loungers",
+      "Massage Chairs",
+      "Showers",
+      "Squat Racks",
+      "Water Fountain",
+      "Cooler Drinks"
+    ]
+  },
+  {
+    "membershipName": "4Less Card",
+    "membershipPrice": "7.99",
+    "membershipDuration": "Every 2 Weeks*",
+    "ID": "fabd4db3-6c7b-46fe-88e3-8e224ebab006",
+    "gym": "Fit4Less",
+    "province": "Ontario",
+    "city": "Mississauga",
+    "GymLocationNameElement": "Millcreek and Derry",
+    "GymLocationAddressElement": "6991 Millcreek Dr, Mississauga, ON - L5N 6B9",
+    "GymLocationPhoneElement": "(905) 814-9222",
+    "GymPinLocationElement": "https://www.google.ca/maps/dir//Fit4Less+6991 Millcreek Dr,Mississauga/@43.596901,-79.759972",
+    "GymAmenitiesArrayList": [
+      "Black Card Workout Area*",
+      "FUNctional Workout Area",
+      "Tanning",
+      "Hydro Massage Beds",
+      "Cooler Drinks",
+      "Massage Chairs",
+      "Showers",
+      "Wi-Fi"
+    ]
+  },
+  {
+    "membershipName": "4Less Card",
+    "membershipPrice": "7.99",
+    "membershipDuration": "Every 2 Weeks*",
+    "ID": "e40fa4ed-ab31-4f26-b06c-22166d881e3b",
+    "gym": "Fit4Less",
+    "province": "Ontario",
+    "city": "Mississauga",
+    "GymLocationNameElement": "Mississauga Westwood",
+    "GymLocationAddressElement": "7205 Goreway Drive, Mississauga, ON - L4T 2T9",
+    "GymLocationPhoneElement": "(905) 673-6807",
+    "GymPinLocationElement": "https://www.google.ca/maps/dir//Fit4Less+7205 Goreway Drive,Mississauga/@43.719731,-79.637083",
+    "GymAmenitiesArrayList": [
+      "Cooler Drinks",
+      "Hydro Massage Beds",
+      "Massage Chairs",
+      "Showers",
+      "Tanning",
+      "Black Card Workout Area",
+      "Wi-Fi"
+    ]
+  },
+  {
+    "membershipName": "4Less Card",
+    "membershipPrice": "7.99",
+    "membershipDuration": "Every 2 Weeks*",
+    "ID": "d4c5e154-83de-4a40-b177-f9e1b1ef9201",
+    "gym": "Fit4Less",
+    "province": "Ontario",
+    "city": "Ottawa",
+    "GymLocationNameElement": "Gloucester City Park Drive",
+    "GymLocationAddressElement": "1525 City Park Dr, Ottawa, ON - K1J 1H3",
+    "GymLocationPhoneElement": "(613) 749-7418",
+    "GymPinLocationElement": "https://www.google.ca/maps/dir//Fit4Less+1525 City Park Dr,Ottawa/@45.431377,-75.611944",
+    "GymAmenitiesArrayList": [
+      "Cooler Drinks",
+      "Hydro Massage Beds",
+      "Massage Chairs",
+      "Tanning",
+      "Black Card Workout Area",
+      "Wi-Fi"
+    ]
+  },
+  {
+    "membershipName": "4Less Card",
+    "membershipPrice": "7.99",
+    "membershipDuration": "Every 2 Weeks*",
+    "ID": "b15c4976-ccb9-40cf-826b-fbe6dccf977c",
+    "gym": "Fit4Less",
+    "province": "Ontario",
+    "city": "Hamilton",
+    "GymLocationNameElement": "Hamilton Barton at Centennial Pkwy",
+    "GymLocationAddressElement": "2425 Barton Street East, Hamilton, ON - L8E 2W7",
+    "GymLocationPhoneElement": "(905) 573-9187",
+    "GymPinLocationElement": "https://www.google.ca/maps/dir//Fit4Less+2425 Barton Street East,Hamilton/@43.237995,-79.762152",
+    "GymAmenitiesArrayList": [
+      "Cooler Drinks",
+      "Hydro Massage Beds",
+      "Massage Chairs",
+      "Showers",
+      "Tanning",
+      "Wi-Fi"
+    ]
+  },
+  {
+    "membershipName": "4Less Card",
+    "membershipPrice": "7.99",
+    "membershipDuration": "Every 2 Weeks*",
+    "ID": "1971da6d-d815-4044-8c92-aa60231d5c2d",
+    "gym": "Fit4Less",
+    "province": "Ontario",
+    "city": "Hamilton",
+    "GymLocationNameElement": "Hamilton Centre",
+    "GymLocationAddressElement": "1211 Barton Street East, Hamilton, ON - L8H 2V4",
+    "GymLocationPhoneElement": "(905) 312-9945",
+    "GymPinLocationElement": "https://www.google.ca/maps/dir//Fit4Less+1211 Barton Street East,Hamilton/@43.253029,-79.810588",
+    "GymAmenitiesArrayList": [
+      "Cooler Drinks",
+      "Hydro Massage Beds",
+      "Massage Chairs",
+      "Showers",
+      "Tanning",
+      "TRX Training Zone",
+      "Total Gym Circuit",
+      "Black Card Workout Area*",
+      "Wi-Fi"
+    ]
+  },
+  {
+    "membershipName": "4Less Card",
+    "membershipPrice": "7.99",
+    "membershipDuration": "Every 2 Weeks*",
+    "ID": "b40ebf71-b80e-4f7d-ab89-350dcdb2bd44",
+    "gym": "Fit4Less",
+    "province": "Ontario",
+    "city": "Ottawa",
+    "GymLocationNameElement": "Kanata Eagleson Road",
+    "GymLocationAddressElement": "100 Michael Cowpland Drive, Ottawa, ON - K2M 1X3",
+    "GymLocationPhoneElement": "(613) 270-0372",
+    "GymPinLocationElement": "https://www.google.ca/maps/dir//Fit4Less+100 Michael Cowpland Drive,Ottawa/@45.284006,-75.866861",
+    "GymAmenitiesArrayList": [
+      "Hydro Massage Beds",
+      "Massage Chairs",
+      "Tanning",
+      "Showers",
+      "Black Card Workout Area",
+      "FUNctional Workout Area",
+      "Wi-Fi"
+    ]
+  },
+  {
+    "membershipName": "4Less Card",
+    "membershipPrice": "7.99",
+    "membershipDuration": "Every 2 Weeks*",
+    "ID": "56de3f0f-1728-45a9-b411-f8a03235927c",
+    "gym": "Fit4Less",
+    "province": "Ontario",
+    "city": "Kitchener",
+    "GymLocationNameElement": "Kitchener Weber St East",
+    "GymLocationAddressElement": "1375 Weber St. East, Kitchener, ON - N2A 1C4",
+    "GymLocationPhoneElement": "(519) 894-3022",
+    "GymPinLocationElement": "https://www.google.ca/maps/dir//Fit4Less+1375 Weber St. East,Kitchener/@43.432146,-80.441102",
+    "GymAmenitiesArrayList": [
+      "Cooler Drinks",
+      "Hydro Massage Beds",
+      "Massage Chairs",
+      "Showers",
+      "Tanning"
+    ]
+  },
+  {
+    "membershipName": "4Less Card",
+    "membershipPrice": "7.99",
+    "membershipDuration": "Every 2 Weeks*",
+    "ID": "cf917b65-8204-4316-8f40-e5e19ca49904",
+    "gym": "Fit4Less",
+    "province": "Ontario",
+    "city": "Ottawa",
+    "GymLocationNameElement": "Orleans Place d'Orleans Drive",
+    "GymLocationAddressElement": "102-1220 Place d’Orleans Drive, Orleans, ON - K1C 7K3",
+    "GymLocationPhoneElement": "(613) 837-8780",
+    "GymPinLocationElement": "https://www.google.ca/maps/dir//Fit4Less+102-1220 Place d’Orleans Drive,Orleans/@45.476744,-75.520419",
+    "GymAmenitiesArrayList": [
+      "Cooler Drinks",
+      "Hydro Massage Beds",
+      "Massage Chairs",
+      "Tanning",
+      "Wi-Fi"
+    ]
+  },
+  {
+    "membershipName": "4Less Card",
+    "membershipPrice": "7.99",
+    "membershipDuration": "Every 2 Weeks*",
+    "ID": "8ada7a1a-9b35-421c-82b6-42496000269d",
+    "gym": "Fit4Less",
+    "province": "Ontario",
+    "city": "Ottawa",
+    "GymLocationNameElement": "Ottawa Merivale",
+    "GymLocationAddressElement": "1460 Merivale Road #1001, Ottawa, ON - K2C 0A9",
+    "GymLocationPhoneElement": "(613) 224-6310",
+    "GymPinLocationElement": "https://www.google.ca/maps/dir//Fit4Less+1460 Merivale Road #1001,Ottawa/@45.362414,-75.732997",
+    "GymAmenitiesArrayList": [
+      "Cooler Drinks",
+      "Massage Chairs",
+      "Tanning",
+      "Wi-Fi"
+    ]
+  },
+  {
+    "membershipName": "4Less Card",
+    "membershipPrice": "7.99",
+    "membershipDuration": "Every 2 Weeks*",
+    "ID": "b46e1537-7ee8-42e5-a754-1cb69e6f6f5c",
+    "gym": "Fit4Less",
+    "province": "Ontario",
+    "city": "Ottawa",
+    "GymLocationNameElement": "Ottawa River Road",
+    "GymLocationAddressElement": "685 River Road, Ottawa, ON - K1V 2G2",
+    "GymLocationPhoneElement": "(613) 822-0154",
+    "GymPinLocationElement": "https://www.google.ca/maps/dir//Fit4Less+685 River Road,Ottawa/@45.27021,-75.698177",
+    "GymAmenitiesArrayList": [
+      "Hydro Massage Beds",
+      "Massage Chairs",
+      "Tanning",
+      "Showers - Women only"
+    ]
+  },
+  {
+    "membershipName": "4Less Card",
+    "membershipPrice": "7.99",
+    "membershipDuration": "Every 2 Weeks*",
+    "ID": "3020783a-c924-4570-bbe0-fee9a62d7264",
+    "gym": "Fit4Less",
+    "province": "Ontario",
+    "city": "Ottawa",
+    "GymLocationNameElement": "Orleans Innes Road",
+    "GymLocationAddressElement": "4270 Innes Road, South Orleans, Ottawa, ON - K4A 5E6",
+    "GymLocationPhoneElement": "(613) 830-5937",
+    "GymPinLocationElement": "https://www.google.ca/maps/dir//Fit4Less+4270 Innes Road, South Orleans,Ottawa/@45.4582717,-75.495737",
+    "GymAmenitiesArrayList": [
+      "Hydro Massage Beds",
+      "Massage Chairs",
+      "Tanning",
+      "Showers - Women only",
+      "Wi-Fi"
+    ]
+  },
+  {
+    "membershipName": "4Less Card",
+    "membershipPrice": "7.99",
+    "membershipDuration": "Every 2 Weeks*",
+    "ID": "267e597b-d663-450f-a0fe-d15f6210d18d",
+    "gym": "Fit4Less",
+    "province": "Ontario",
+    "city": "Ottawa",
+    "GymLocationNameElement": "Ottawa Walkley Road",
+    "GymLocationAddressElement": "2020 Walkley Road, Ottawa, ON - K1G 6S6",
+    "GymLocationPhoneElement": "(613) 526-2435",
+    "GymPinLocationElement": "https://www.google.ca/maps/dir//Fit4Less+2020 Walkley Road,Ottawa/@45.384869,-75.630752",
+    "GymAmenitiesArrayList": [
+      "Hydro Massage Beds",
+      "Massage Chairs",
+      "Showers",
+      "Tanning",
+      "Cooler Drinks",
+      "Wi-Fi",
+      "Black Card Workout Area"
+    ]
   }
 ]

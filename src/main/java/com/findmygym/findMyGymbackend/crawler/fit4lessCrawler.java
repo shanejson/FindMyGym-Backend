@@ -33,7 +33,8 @@ public class fit4lessCrawler {
         //Province Selection
         driver.findElement(By.id("province-dropdown")).click();
         Thread.sleep(1000);
-        WebElement dropdownElement = driver.findElement(By.cssSelector("#province-dropdown > ul > li[data-provname=\"Ontario\"]"));
+        //WebElement dropdownElement = driver.findElement(By.cssSelector("#province-dropdown > ul > li[data-provname=\"Ontario\"]"));
+        WebElement dropdownElement = driver.findElement(By.cssSelector("#province-dropdown > ul > li[data-provname="+provinceName+"]"));
         Actions actions = new Actions(driver);
         actions.scrollToElement(dropdownElement).perform();
         dropdownElement.click();
@@ -41,7 +42,8 @@ public class fit4lessCrawler {
         //City Selection
         driver.findElement(By.id("city-dropdown")).click();
         Thread.sleep(1000);
-        WebElement cityElement = driver.findElement(By.cssSelector("#city-dropdown > ul > li[data-cityname=\"Brampton\"]"));
+        //WebElement cityElement = driver.findElement(By.cssSelector("#city-dropdown > ul > li[data-cityname=\"Brampton\"]"));
+        WebElement cityElement = driver.findElement(By.cssSelector("#city-dropdown > ul > li[data-cityname="+cityName+"]"));
         actions.scrollToElement(cityElement).perform();
         cityElement.click();
 
