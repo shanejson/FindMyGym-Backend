@@ -147,4 +147,30 @@ public class wordExtractor {
         fileWriter.close();
 
     }
+    public static void extractingCitiesWithIds() throws IOException {
+        // Read the JSON file
+        BufferedReader br = new BufferedReader(new FileReader("gymData.json"));
+
+        // Parse the JSON content
+        Gson gson = new Gson();
+        JsonArray jsonArray = gson.fromJson(br, JsonArray.class);
+
+        // Create a StringBuilder to store the extracted province and city details
+        StringBuilder sb = new StringBuilder();
+
+        // Extract province and city details and append them to the StringBuilder
+        for (JsonElement element : jsonArray) {
+            JsonObject jsonObject = element.getAsJsonObject();
+            String province = jsonObject.get("city").getAsString();
+            String city = jsonObject.get("ID").getAsString();
+            sb.append(province).append(", ").append(city).append("\n");
+        }
+
+        // Write the extracted details to a text file
+        FileWriter writer = new FileWriter("data_for_invertedIndexing.txt");
+        writer.write(sb.toString());
+        writer.close();
+
+        System.out.println("city and ID details have been extracted and stored in data_for_invertedIndexing.txt");
+    }
 }

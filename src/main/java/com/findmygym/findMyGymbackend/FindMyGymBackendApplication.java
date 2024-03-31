@@ -20,13 +20,16 @@ import java.io.IOException;
 import java.util.List;
 import java.util.*;
 
+import static com.findmygym.findMyGymbackend.extractor.wordExtractor.extractingCitiesWithIds;
+
 @SpringBootApplication
 public class FindMyGymBackendApplication {
-
 	//public static void main(String[] args) {
 	//	SpringApplication.run(FindMyGymBackendApplication.class, args);
 	//}
 	public static void main(String[] args) throws InterruptedException, IOException {
+
+		extractingCitiesWithIds();
 
 //		Scanner sc = new Scanner(System.in);
 //		System.out.println("Enter Province: ");
@@ -84,8 +87,8 @@ public class FindMyGymBackendApplication {
 		//SearchFrequency SearchFrequency = new SearchFrequency();
 		//SearchFrequency.searchFrequency("Toronto");
 
-		PageRanking PageRanking = new PageRanking();
-		PageRanking.PageRanker();
+//		PageRanking PageRanking = new PageRanking();
+//		PageRanking.PageRanker();
 
 
 		//--------SMIT-------------------
