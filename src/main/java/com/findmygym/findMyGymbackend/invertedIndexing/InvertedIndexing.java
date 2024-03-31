@@ -1,7 +1,4 @@
 package com.findmygym.findMyGymbackend.invertedIndexing;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import org.w3c.dom.Node;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,15 +9,11 @@ import java.util.regex.Pattern;
 public class InvertedIndexing {
     TrieNode rootNode;
 
-//    public InvertedIndex(){
-//        rootNode = new TrieNode();
-//    }
-
     public InvertedIndexing(){
         rootNode = new TrieNode();
     }
 
-    public void insertWord(String word, List<String> objId){
+    private void insertWord(String word, List<String> objId){
         TrieNode current = rootNode;
         for (int i = 0; i < word.length(); i++) {
             char c = word.charAt(i);
@@ -38,7 +31,7 @@ public class InvertedIndexing {
         current.setObjId(objId);
     }
 
-    public List<String> searchWord(String word){
+    private List<String> searchWord(String word){
         TrieNode current = rootNode;
         for (int i = 0; i < word.length(); i++) {
             Map<Character,TrieNode> children = current.getChildren();
@@ -59,62 +52,84 @@ public class InvertedIndexing {
         }
     }
 
-//    public List<String> autoComplete(String prefix){
-//
-//    }
+    private boolean searchPrefix(String prefix){
+        TrieNode current = rootNode;
+        String autoCompletedWord = "";
+        for (int i = 0; i < prefix.length(); i++) {
+            Map<Character,TrieNode> children = current.getChildren();
+            char c = prefix.charAt(i);
+            if(children.containsKey(c)){
+                current = children.get(c);
+            }
+            else{
+                return false;
+            }
+        }
+        return true;
+    }
+    private List<String> autoCompleteInternal(String prefix){
+        TrieNode current = rootNode;
 
-//    public void print(TrieNode rootNode,int level, StringBuilder sequence) {
-//        if(rootNode.isLeaf()){
-//            sequence = sequence.insert(level, rootNode.getC());
-//            System.out.println(sequence);
-//        }
-//
-//        Map<Character, TrieNode> children = rootNode.getChildren();
-//        Iterator<Character> iterator = children.keySet().iterator();
-//        while (iterator.hasNext()) {
-//            char character = iterator.next();
-//            sequence = sequence.insert(level, character);
-//            print(children.get(character), level+1, sequence);
-//            sequence.deleteCharAt(level);
-//        }
-//    }
+        List<String> suggestedWords = new ArrayList<>();
+        for (int i = 0; i < prefix.length(); i++) {
+            Map<Character,TrieNode> children = current.getChildren();
+            char c = prefix.charAt(i);
+            if(children.containsKey(c)){
+                current = children.get(c);
+            }
+            else{
+                return null;
+            }
+        }
+        completeWords(current,suggestedWords,prefix);
+        return suggestedWords;
+    }
 
-    public static void main(String args[]){
-        InvertedIndexing invertedIndex = new InvertedIndexing();
-        Map<String, String > citiesWithId = invertedIndex.exctractCitiesWithId();
+    private void completeWords(TrieNode currNode, List<String> suggestedWords, String word ){
+        if(currNode == null) return;
+
+        if(currNode.isLeaf()) suggestedWords.add(word);
+
+        Map<Character, TrieNode> map = currNode.getChildren();
+        for(Character c:map.keySet()){
+            completeWords(map.get(c), suggestedWords, word+String.valueOf(c));
+        }
+    }
+
+    public List<String> getObjIds(String inputWord){
+
+        Map<String, String > citiesWithId = exctractCitiesWithId();
 
         for (String city: citiesWithId.keySet()) {
 
             String cityName = citiesWithId.get(city);
             //System.out.println(city + " " + value);
 
-            List<String> objIds = invertedIndex.getIds(citiesWithId, cityName);
-            invertedIndex.insertWord(cityName, objIds);
+            List<String> objIds = getIds(citiesWithId, cityName);
+            insertWord(cityName, objIds);
 
         }
 
-        List<String> associatedObjId =invertedIndex.searchWord("windsor");
-        System.out.println(associatedObjId);
-//        InvertedIndex trie = new InvertedIndex();
-//        List<String> objIds = new ArrayList<>();
-//
-//        objIds.add("10");
-//        objIds.add("11");
-//
-//        trie.insertWord("hello", objIds);
-//     ;
-//        List<String> objId = trie.searchWord("hello");
-////
-//        if(objId == null){
-//            System.out.println("no ids found");
-//        }else {
-//            for(String id : objId ){
-//                System.out.println(id);
-//            }
-//        }
+        return searchWord("windsor");
+
     }
 
-    public List<String> getIds(Map<String, String> data ,String cityName){
+    public List<String> autoComplete(String inputWord){
+        Map<String, String > citiesWithId = exctractCitiesWithId();
+
+        for (String city: citiesWithId.keySet()) {
+
+            String cityName = citiesWithId.get(city);
+            //System.out.println(city + " " + value);
+
+            List<String> objIds = getIds(citiesWithId, cityName);
+            insertWord(cityName, objIds);
+
+        }
+        return autoCompleteInternal("win");
+    }
+
+    private List<String> getIds(Map<String, String> data ,String cityName){
         List<String> idsAssociatedToCity = new ArrayList<>();
         for(String id : data.keySet()){
 
@@ -145,91 +160,4 @@ public class InvertedIndexing {
         return citiesWithID;
     }
 }
-//public class InvertedIndex {
-//
-//    private TrieNode root;
-//
-//    public InvertedIndex(){
-//        root = new TrieNode('\0');
-//    }
-//
-//    public void insertWord(String word){
-//        TrieNode curr = root;
-//
-//        for (int i = 0 ; i < word.length() ; i++){
-//            char c = word.charAt(i);
-//            if(curr.children[c - 'a'] == null){
-//                curr.children[c-'a'] = new TrieNode(c);
-//
-//            }
-//            curr = curr.children[c-'a'];
-//
-//        }
-//        curr.isWord = true;
-//    }
-//
-//    public TrieNode getNode(String word){
-//        TrieNode curr = root;
-//
-//        for (int i = 0 ; i < word.length() ; i++){
-//            char c = word.charAt(i);
-//            if(curr.children[c - 'a'] == null){
-//                return null;
-//            }
-//            curr = curr.children[c-'a'];
-//        }
-//        return curr;
-//    }
-//
-//    public boolean search(String word) {
-//        TrieNode node = getNode(word);
-//        return node != null && node.isWord;
-//    }
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-////    private TrieNode root;
-////    public void insert(String word) {
-////        TrieNode current = root;
-////
-////        for (char l: word.toCharArray()) {
-////            current = current.getChildren().computeIfAbsent(l, c -> new TrieNode());
-////        }
-////        current.setEndOfWord(true);
-////    }
-//    public static void main(String args[]){
-//
-//        InvertedIndex trie = new InvertedIndex();
-//
-//        trie.insertWord("hello");
-//        boolean isWordPartOfTrie = trie.search("hello");
-//        System.out.println(isWordPartOfTrie);
-////        InvertedIndex advanceSearch = new InvertedIndex();
-////        //List<String> cityNames ;
-////        Path path = Paths.get("D:\\Project\\ACC project\\findMyGym-backend\\data_for_invertedIndexing.txt");
-////
-////        try {
-////            List<String> lines = Files.readAllLines(path);
-////
-////            for (String line : lines) {
-////                String[] cityWithID = Pattern.compile(",").split(line);
-////                advanceSearch.insertWords(cityWithID[0], cityWithID[1]);
-////            }
-////        } catch (IOException e) {
-////            throw new RuntimeException(e);
-////        }
-//    }
-//
-//
-//}
 
-//}
