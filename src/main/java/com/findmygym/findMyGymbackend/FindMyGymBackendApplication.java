@@ -33,88 +33,99 @@ public class FindMyGymBackendApplication {
 			System.out.println();
 			System.out.println("Hello user welcome to \"Find My Gym\"...");
 
-					System.out.print("Enter location: ");
-					Scanner scanner1 = new Scanner(System.in);
-					String location = scanner1.nextLine().toLowerCase();
-					boolean checkForAutoCompletion = utils.endsWithAsterisk(location);
+			System.out.print("Enter location: ");
+			Scanner scanner1 = new Scanner(System.in);
+			String location = scanner1.nextLine().toLowerCase();
+			boolean checkForAutoCompletion = utils.endsWithAsterisk(location);
 
-					if(checkForAutoCompletion){
-						location = utils.removeAsteriskFromEnd(location);
+			if(checkForAutoCompletion){
+				location = utils.removeAsteriskFromEnd(location);
 
-						boolean isValid = validator.validateCity(location);
-						System.out.println(isValid+ " "+ location);
-						if(isValid){
+				boolean isValid = validator.validateCity(location);
 
-								List<String> suggestedWords = feature.autoComplete(location);
-								if(suggestedWords == null){
-									System.out.println("No Such Cities in our data");
-								}
-								System.out.println("Did you mean...");
-								for(int i = 0; i < Objects.requireNonNull(suggestedWords).size() ; i++){
-									System.out.println(i + 1 + " " + utils.capitalizeFirstLetter(suggestedWords.get(i)));
-								}
-								int choice = scanner1.nextInt();
-								List<String> objIds = feature.getObjIds(suggestedWords.get(choice - 1));
-								searchFrequency.insertSearchFrequency(suggestedWords.get(choice-1));
-								if(objIds.isEmpty()){
-									System.out.println("No Gyms in this city");
-									break;
-								}
-								System.out.println("Search results for " + suggestedWords.get(choice - 1));
-								utils.printResults(objIds);
-								pageRanking.rankGym(objIds);
-								searchFrequency.displayTopFrequencies();
+				if(isValid){
 
-								System.out.println("Total Number of gyms in individaul loactions");
-								wordCounter.wordCounterGym();
-						}else {
-							System.out.println("Please give valid input");
-
-						}
-					}else{
-							List<Map.Entry<String, Integer>> suggestedWords2 = spellchecker.checkSpelling(location);
-
-							if(suggestedWords2.get(0).getValue() == 0){
-								List<String> objIds2 = feature.getObjIds(suggestedWords2.get(0).getKey());
-								searchFrequency.insertSearchFrequency(suggestedWords2.get(0).getKey());
-								System.out.println("Search results for " + suggestedWords2.get(0));
-								utils.printResults(objIds2);
-								pageRanking.rankGym(objIds2);
-								searchFrequency.displayTopFrequencies();
-
-							}
-							if(suggestedWords2.get(0) == null){
-								System.out.println("No Such Cities in our data");
-
-							}
-							System.out.println("Did you mean...");
-							for(int i = 0 ; i < suggestedWords2.size() ; i++){
-								System.out.println(i + 1  + " " + suggestedWords2.get(i).getKey());
-							}
-							System.out.println(suggestedWords2.size() + " if you want to try again");
-							int choice = scanner1.nextInt();
-
-							List<String> objIds2 = feature.getObjIds(suggestedWords2.get(choice - 1).getKey());
-							searchFrequency.insertSearchFrequency(suggestedWords2.get(choice - 1).getKey());
-							if(objIds2.isEmpty()){
-								System.out.println("No Gyms in this city");
-
-							}
-							System.out.println("Search results for " + suggestedWords2.get(choice - 1));
-							utils.printResults(objIds2);
-							pageRanking.rankGym(objIds2);
-							searchFrequency.displayTopFrequencies();
-							System.out.println("Total Number of gyms in individaul loactions");
-							wordCounter.wordCounterGym();
+					List<String> suggestedWords = feature.autoComplete(location);
+					if(suggestedWords == null){
+						System.out.println("No Such Cities in our data");
 					}
+					else {
+						System.out.println("Did you mean...");
+						for(int i = 0; i < suggestedWords.size() ; i++){
+							System.out.println(i + 1 + " " + utils.capitalizeFirstLetter(suggestedWords.get(i)));
+						}
+						int choice = scanner1.nextInt();
+						List<String> objIds = feature.getObjIds(suggestedWords.get(choice - 1));
+						searchFrequency.insertSearchFrequency(suggestedWords.get(choice-1));
+						if(objIds.isEmpty()){
+							System.out.println("No Gyms in this city");
+							break;
+						}
+						System.out.println("Search results for " + suggestedWords.get(choice - 1));
+						utils.printResults(objIds);
+						pageRanking.rankGym(objIds);
+						searchFrequency.displayTopFrequencies();
+
+						System.out.println("Total Number of gyms in individaul loactions");
+						wordCounter.wordCounterGym();
+					}
+				}else {
+					System.out.println("Please give valid input");
+
+				}
+			}else{
+				List<Map.Entry<String, Integer>> suggestedWords2 = spellchecker.checkSpelling(location);
+
+				boolean isValid = validator.validateCity(location);
+
+				if (isValid){
+					if(suggestedWords2.get(0).getValue() == 0){
+						List<String> objIds2 = feature.getObjIds(suggestedWords2.get(0).getKey());
+						searchFrequency.insertSearchFrequency(suggestedWords2.get(0).getKey());
+						System.out.println("Search results for " + suggestedWords2.get(0));
+						utils.printResults(objIds2);
+						pageRanking.rankGym(objIds2);
+						searchFrequency.displayTopFrequencies();
+
+					}
+					if(suggestedWords2.get(0) == null){
+						System.out.println("No Such Cities in our data");
+					}
+					System.out.println("Did you mean...");
+					for(int i = 0 ; i < suggestedWords2.size() ; i++){
+						System.out.println(i + 1  + " " + suggestedWords2.get(i).getKey());
+					}
+					System.out.println(suggestedWords2.size()+1 + " if you want to try again");
+					int choice = scanner1.nextInt();
+					if(choice == suggestedWords2.size()+1){
+						continue;
+					}
+					List<String> objIds2 = feature.getObjIds(suggestedWords2.get(choice - 1).getKey());
+					searchFrequency.insertSearchFrequency(suggestedWords2.get(choice - 1).getKey());
+					if(objIds2.isEmpty()){
+						System.out.println("No Gyms in this city");
+
+					}
+					System.out.println("Search results for " + suggestedWords2.get(choice - 1));
+					utils.printResults(objIds2);
+					pageRanking.rankGym(objIds2);
+					searchFrequency.displayTopFrequencies();
+					System.out.println("Total Number of gyms in individaul loactions");
+					wordCounter.wordCounterGym();
+
+				}
+				else {
+					System.out.println("Give Valid Input");
+				}
+			}
 			System.out.println();
 			System.out.println( " =============================================================================== ");
-
-
 		}
+
 
 
 	}
 
-}
+
+	}
 
