@@ -132,7 +132,7 @@ public class WordCounter {
             displayWordFrequencies(wordFrequencyMap);
 
             // Displaying_the_frequent words c.e gyms
-            System.out.println("\nDecreasing order of number of gyms in different provinces:");
+            System.out.println("\nDecreasing order of number of gyms in different provinces and cities:");
             displayMostFrequentWords(wordFrequencyMap);
 
 

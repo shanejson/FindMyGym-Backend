@@ -33,7 +33,7 @@ public class FindMyGymBackendApplication {
 			System.out.println();
 			System.out.println("Hello user welcome to \"Find My Gym\"...");
 
-			System.out.print("Enter location: ");
+			System.out.print("Enter City (Add * at the end to get auto Complete): ");
 			Scanner scanner1 = new Scanner(System.in);
 			String location = scanner1.nextLine().toLowerCase();
 			boolean checkForAutoCompletion = utils.endsWithAsterisk(location);
@@ -54,20 +54,24 @@ public class FindMyGymBackendApplication {
 						for(int i = 0; i < suggestedWords.size() ; i++){
 							System.out.println(i + 1 + " " + utils.capitalizeFirstLetter(suggestedWords.get(i)));
 						}
-						int choice = scanner1.nextInt();
-						List<String> objIds = feature.getObjIds(suggestedWords.get(choice - 1));
-						searchFrequency.insertSearchFrequency(suggestedWords.get(choice-1));
-						if(objIds.isEmpty()){
-							System.out.println("No Gyms in this city");
-							break;
-						}
-						System.out.println("Search results for " + suggestedWords.get(choice - 1));
-						utils.printResults(objIds);
-						pageRanking.rankGym(objIds);
-						searchFrequency.displayTopFrequencies();
+						try{
+							int choice = scanner1.nextInt();
+							List<String> objIds = feature.getObjIds(suggestedWords.get(choice - 1));
+							searchFrequency.insertSearchFrequency(suggestedWords.get(choice-1));
+							if(objIds.isEmpty()){
+								System.out.println("No Gyms in this city");
+								break;
+							}
+							System.out.println("Search results for " + suggestedWords.get(choice - 1));
+							utils.printResults(objIds);
+							pageRanking.rankGym(objIds);
+							searchFrequency.displayTopFrequencies();
 
-						System.out.println("Total Number of gyms in individaul loactions");
-						wordCounter.wordCounterGym();
+							System.out.println("Total Number of gyms in individaul loactions");
+							wordCounter.wordCounterGym();
+						}catch (InputMismatchException e){
+							System.out.println("Please give valid input");
+						}
 					}
 				}else {
 					System.out.println("Please give valid input");
@@ -93,25 +97,30 @@ public class FindMyGymBackendApplication {
 					}
 					System.out.println("Did you mean...");
 					for(int i = 0 ; i < suggestedWords2.size() ; i++){
-						System.out.println(i + 1  + " " + suggestedWords2.get(i).getKey());
+						System.out.println(i + 1  + " : " + suggestedWords2.get(i).getKey());
 					}
 					System.out.println(suggestedWords2.size()+1 + " if you want to try again");
-					int choice = scanner1.nextInt();
-					if(choice == suggestedWords2.size()+1){
-						continue;
-					}
-					List<String> objIds2 = feature.getObjIds(suggestedWords2.get(choice - 1).getKey());
-					searchFrequency.insertSearchFrequency(suggestedWords2.get(choice - 1).getKey());
-					if(objIds2.isEmpty()){
-						System.out.println("No Gyms in this city");
+					System.out.println("Select any options from above : ");
+					try{
+						int choice = scanner1.nextInt();
+						if(choice == suggestedWords2.size()+1){
+							continue;
+						}
+						List<String> objIds2 = feature.getObjIds(suggestedWords2.get(choice - 1).getKey());
+						searchFrequency.insertSearchFrequency(suggestedWords2.get(choice - 1).getKey());
+						if(objIds2.isEmpty()){
+							System.out.println("No Gyms in this city");
 
+						}
+						System.out.println("Search results for " + suggestedWords2.get(choice - 1));
+						utils.printResults(objIds2);
+						pageRanking.rankGym(objIds2);
+						searchFrequency.displayTopFrequencies();
+						System.out.println("Total Number of gyms in individaul loactions");
+						wordCounter.wordCounterGym();
+					}catch (InputMismatchException e){
+						System.out.println("Please enter valid input");
 					}
-					System.out.println("Search results for " + suggestedWords2.get(choice - 1));
-					utils.printResults(objIds2);
-					pageRanking.rankGym(objIds2);
-					searchFrequency.displayTopFrequencies();
-					System.out.println("Total Number of gyms in individaul loactions");
-					wordCounter.wordCounterGym();
 
 				}
 				else {
@@ -127,5 +136,5 @@ public class FindMyGymBackendApplication {
 	}
 
 
-	}
+}
 
