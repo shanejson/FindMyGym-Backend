@@ -11,17 +11,13 @@ public class Spellchecker {
         File outputFile = new File("locations.txt");
 
         if(outputFile.exists()){
-//            System.out.println("Words List Exists!");
+
             try {
                 Set<String> words = readWordsFromFile(String.valueOf(outputFile));
 
 
                 List<Map.Entry<String, Integer>> closestWords = findClosestWords(userInput, words);
 
-//                System.out.println("Did you mean:");
-//                for (Map.Entry<String, Integer> entry : closestWords) {
-//                    System.out.println(capitalizeFirstLetter(entry.getKey()));// + " - Edit Distance: " + entry.getValue());
-//                }
 
                 return closestWords;
             } catch (IOException e) {

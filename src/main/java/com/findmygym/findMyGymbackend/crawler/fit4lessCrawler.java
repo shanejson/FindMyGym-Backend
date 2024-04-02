@@ -4,101 +4,99 @@ import lombok.AllArgsConstructor;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.io.FileHandler;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.handler.FilteringWebHandler;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URI;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 @Service
 @AllArgsConstructor
 
 public class fit4lessCrawler {
     public void getFit4lessDetails(String provinceName, String cityName) throws InterruptedException{
-        System.out.println("Crawling Fit4Less.....");
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://www.fit4less.ca/locations");
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
+        //System.out.println("Crawling Fit4Less.....");
+        try {
+            //Chrome Drive initialization
+            WebDriver driver = new ChromeDriver();
 
-        //Province Selection
-        driver.findElement(By.id("province-dropdown")).click();
-        Thread.sleep(1000);
-        //WebElement dropdownElement = driver.findElement(By.cssSelector("#province-dropdown > ul > li[data-provname=\"Ontario\"]"));
-        WebElement dropdownElement = driver.findElement(By.cssSelector("#province-dropdown > ul > li[data-provname="+provinceName+"]"));
-        Actions actions = new Actions(driver);
-        actions.scrollToElement(dropdownElement).perform();
-        dropdownElement.click();
+            //URL to navigate to
+            driver.get("https://www.fit4less.ca/locations");
 
-        //City Selection
-        driver.findElement(By.id("city-dropdown")).click();
-        Thread.sleep(1000);
-        //WebElement cityElement = driver.findElement(By.cssSelector("#city-dropdown > ul > li[data-cityname=\"Brampton\"]"));
-        WebElement cityElement = driver.findElement(By.cssSelector("#city-dropdown > ul > li[data-cityname="+cityName+"]"));
-        actions.scrollToElement(cityElement).perform();
-        cityElement.click();
+            //Setting an implicit wait so the driver can wait for the elements that have to be found
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-        //Find Button
-        driver.findElement(By.xpath("//*[@id=\"btn-find-your-gym\"]")).click();
-        Thread.sleep(1000);
-        //Add gym location URLs
-        List<String> availableGymLinks = new ArrayList<>();
+            //Maximizing the browser window
+            driver.manage().window().maximize();
 
-        //All the Gyms Available
-        List<WebElement> availableGyms = driver.findElements(By.className("find-gym__result"));
+            //Province Dropdown Selection and waiting for the list to open
+            driver.findElement(By.id("province-dropdown")).click();
+            Thread.sleep(1000);
 
-        //Adding the links in Available Gym Links Array List
-        availableGyms.forEach(x -> {
-            String GymLink = x.findElement(By.tagName("a")).getAttribute("href");
-            availableGymLinks.add(GymLink);
-        });
+            //Finding the user provided Province and selecting it
+            WebElement dropdownElement = driver.findElement(By.cssSelector("#province-dropdown > ul > li[data-provname="+provinceName+"]"));
+            Actions actions = new Actions(driver);
+            actions.scrollToElement(dropdownElement).perform();
+            dropdownElement.click();
 
-        System.out.println(availableGymLinks);
+            //Finding the user provided City and selecting it
+            driver.findElement(By.id("city-dropdown")).click();
+            Thread.sleep(1000);
+            WebElement cityElement = driver.findElement(By.cssSelector("#city-dropdown > ul > li[data-cityname="+cityName+"]"));
+            actions.scrollToElement(cityElement).perform();
+            cityElement.click();
 
-        //Folder to store HTML files
-        String folderPath = "HTMLFilesfit4Less";
+            //Clicking the "Find" Button
+            driver.findElement(By.xpath("//*[@id=\"btn-find-your-gym\"]")).click();
+            Thread.sleep(3000);
 
-        // Create the folder if it doesn't exist
-        File folder = new File(folderPath);
-        if (!folder.exists()) {
-            folder.mkdirs();
-        }
+            //Array List to store the links of branches for that location
+            List<String> availableGymLinks = new ArrayList<>();
 
-        //Iterate over the links
-        for(String i: availableGymLinks){
-            driver.get(i);
-            // wait for html to be loaded
-            Thread.sleep(5000);
+            //From the available gyms, the links will be extracted and stored in the array list
+            List<WebElement> availableGyms = driver.findElements(By.className("find-gym__result"));
+            availableGyms.forEach(x -> {
+                String GymLink = x.findElement(By.tagName("a")).getAttribute("href");
+                availableGymLinks.add(GymLink);
+            });
 
-            System.out.println("Visiting: " + i);
+            System.out.println("Fit4Less Available Gyms: "+availableGymLinks);
 
-            //Get HTML Source
-            String pageSource = driver.getPageSource();
+            //HTML files will be stored in the respected folder
+            String folderPath = "HTMLFilesfit4Less";
 
-            //Gym Location Name
-            String lastPath = i.substring(i.lastIndexOf('/') + 1);
-
-            try {
-                BufferedWriter writer = new BufferedWriter(new FileWriter(folderPath+"/"+"fit4less-"+lastPath+".html"));
-                writer.write(pageSource);
-                writer.close();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            //If folder is not present will simply create it
+            File folder = new File(folderPath);
+            if (!folder.exists()) {
+                folder.mkdirs();
             }
 
+            //Iterate over the links in the arraylist, access the page source and store it in the folder
+            for(String i: availableGymLinks){
+                driver.get(i);
+                Thread.sleep(5000);
+                System.out.println("Crawling: " + i);
+                String pageSource = driver.getPageSource();
+                String lastPath = i.substring(i.lastIndexOf('/') + 1);
+                try {
+                    BufferedWriter writer = new BufferedWriter(new FileWriter(folderPath+"/"+"fit4less-"+lastPath+".html"));
+                    writer.write(pageSource);
+                    writer.close();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            System.out.println("Crawling Fit4Less completed.");
+            driver.close();
+        }catch (WebDriverException e) {
+            // Handling WebDriver initialization failure
+            System.err.println("WebDriver: " + e.getMessage());
+            throw new RuntimeException(e);
         }
 
 
-
-        driver.close();
     }
 }

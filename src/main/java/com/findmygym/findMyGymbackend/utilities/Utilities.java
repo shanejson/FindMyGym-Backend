@@ -9,8 +9,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.lang.reflect.Type;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Utilities {
+    ///////////////////////////////// EXTRACT RESULTS FROM JSON ///////////////////////
     public Map<String , GymDetails> extractResult(List<String> objIds) {
 
         Map<String, GymDetails> results = new HashMap<>();
@@ -24,9 +27,10 @@ public class Utilities {
                 Gson g = new Gson();
                 bucket = g.fromJson(rdr, type);
 
+                // GETTING DATA ONLY WITH THIS IDS
                 for (String objId : objIds){
                     for (GymDetails result: bucket){
-
+                        // CHECKING IDS ONLY GET THOSE
                         if(objId.trim().equals(result.getID().trim())){
 
                            results.put(result.getID(), result);
@@ -34,29 +38,57 @@ public class Utilities {
                         }
                     }
                 }
-
+                /// HANDLING FILE NOT FOUND EXCEPTIONS
             } catch (FileNotFoundException e) {
-//                throw new RuntimeException(e);
                 System.out.println("Couldnt Search For the result please try again later");
             }
         }
         return results;
     }
 
+    ///////////////////////////////// PRINTING RESULTS ////////////////////////////////////
     public void printResults(List<String> objIds){
-//        utilities utilities = new utilities();
-//        List<String> objIds = new ArrayList<>();
-//        objIds.add("cc6f5819-8c82-41a9-800d-6ebd2c4e8de7");
 
         Map<String, GymDetails> results = extractResult(objIds);
 
-        for (Map.Entry<String,GymDetails> result : results.entrySet() ){
+        // SHOWING DATA ONLY WITH HIGHEST NUMBER OF AMENITIES
+        Map<String,GymDetails> sortedNewMap = results.entrySet().stream().sorted((e1,e2)->
+                Integer.max(e1.getValue().getGymAmenitieslength(), e2.getValue().getGymAmenitieslength()))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+                        (e1, e2) -> e1, LinkedHashMap::new));
 
-            System.out.println("ID : " + result.getKey());
-            GymDetails gymInfo = result.getValue();
+        System.out.println("Top 5 Gyms for the city are : ");
+        int index = 0;
+        for (Map.Entry<String,GymDetails> result : sortedNewMap.entrySet() ){
+            if(index < 5){
+                GymDetails gymInfo = result.getValue();
+                System.out.println();
+                System.out.println( "******************************************************************************************************************");
+                System.out.println("    Gym Name : " + gymInfo.getGym());
+                System.out.println("    Gym Membership Price : " + gymInfo.getMembershipPrice());
+                System.out.println("    Gym Membership Name : " + gymInfo.getMembershipName());
+                System.out.println("    Gym Working Hours : " + gymInfo.getMembershipDuration());
+                System.out.println("    Gym City : " + gymInfo.getCity());
+                System.out.println("    Gym Province : " + gymInfo.getProvince());
+                System.out.println("    Gym Location : " + gymInfo.getGymLocationNameElement());
+                System.out.println("    Gym Address : " + gymInfo.getGymLocationAddressElement());
+                System.out.println("    Gym Contact : " + gymInfo.getGymLocationPhoneElement());
+                System.out.println("    Gym Google Map Point : " + gymInfo.getGymPinLocationElement());
+                System.out.println("    Gym Total Amenities : " + gymInfo.getGymAmenitieslength());
+                System.out.println("    Gym Amenities are as follows : " );
 
-            System.out.println("Gym Name : " + gymInfo.getGym());
-            System.out.println("Gym City : " + gymInfo.getCity());
+                List<String> amenities = gymInfo.getGymAmenitiesArrayList();
+
+                for(String amenity : amenities){
+                    System.out.println("        " +amenity);
+                }
+
+                System.out.println( "******************************************************************************************************************");
+            }else {
+                break;
+            }
+            index++;
+
         }
 
 
@@ -67,31 +99,22 @@ public class Utilities {
         }
         return Character.toUpperCase(word.charAt(0)) + word.substring(1);
     }
+
+    // REMOVE ASTERIK METHOD
+    public String removeAsteriskFromEnd(String str) {
+        // Check if the string ends with '*'
+        if (str.endsWith("*")) {
+            // If it does, remove the last character
+            return str.substring(0, str.length() - 1);
+        } else {
+            // If it doesn't, return the original string
+            return str;
+        }
+    }
+
+    // CHECK ASTERIK METHOD
+    public boolean endsWithAsterisk(String str) {
+        // Check if the string ends with '*'
+        return str.endsWith("*");
+    }
 }
-//  {
-//          "ID": "cc6f5819-8c82-41a9-800d-6ebd2c4e8de7",
-//          "gym": "Planet Fitness",
-//          "GymLocationNameElement": "Etobicoke",
-//          "GymLocationAddressElement": "180 Queens Plate Drive",
-//          "city": "Toronto",
-//          "province": "Ontario",
-//          "GymLocationPhoneElement": "(416) 745-7177",
-//          "GymPinLocationElement": "https://www.google.com/maps/place/180+Queens+Plate+Dr,+Etobicoke,+ON+M9W+6Y9,+Canada/@43.7186276,-79.5967954,17z/data=!3m1!4b1!4m2!3m1!1s0x882b3a4864182fd3:0xe6ce4c137b67606",
-//          "GymAmenitiesArrayList": [
-//          "Bring a Guest Anytime",
-//          "Use of Any Planet Fitness Worldwide",
-//          "Use of Tanning",
-//          "Use of Massage Chairs",
-//          "Use of HydroMassage™",
-//          "Use of Total Body Enhancement",
-//          "50% Off Select Drinks",
-//          "Premium Perks: Partner Rewards & Discounts",
-//          "Unlimited Access to Home Club",
-//          "PF App Workouts",
-//          "Free Fitness Training",
-//          "Perks: Partner Rewards & Discounts"
-//          ],
-//          "membershipName": "CLASSIC",
-//          "membershipPrice": "15",
-//          "membershipDuration": "/mo"
-//          },

@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+////////////////////////////// TRIE NODE IMPLEMENTATION ///////////////////////////////
 public class TrieNode {
     /**
      * -- SETTER --
@@ -19,6 +20,8 @@ public class TrieNode {
      */
     @Getter
     @Setter
+
+    // THE CHARACTER THAT WILL BE STORED AT NODE
     private char c;
     /**
      * -- GETTER --
@@ -26,10 +29,16 @@ public class TrieNode {
      * @return the children
      */
     @Getter
+
+    // CHARACTER AND NEXT TRIE NODE
     private final Map<Character,TrieNode> children = new HashMap<>();
     @Setter
     @Getter
+
+    // LIST OF OBJECT IDS
     private List<String> objId;
+
+    // FLAG THAT INDICATES END OF WORD
     private boolean isLeaf = false;
 
     TrieNode(){
@@ -39,9 +48,13 @@ public class TrieNode {
     /**
      * @return the isLeaf
      */
+
+    // RETURNS LEAF
     public boolean isLeaf() {
         return isLeaf;
     }
+
+    // SET LEAF
 
     /**
      * @param isLeaf the isLeaf to set

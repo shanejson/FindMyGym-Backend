@@ -8,7 +8,7 @@ import lombok.Getter;
 import java.util.List;
 
 @Entity
-public class GymDetails {
+public class GymDetails implements Comparable<GymDetails> {
 
     @Id
     @GeneratedValue
@@ -169,6 +169,11 @@ public class GymDetails {
 
     public String getGymPinLocationLongitude() {
         return GymPinLocationLongitude;
+    }
+
+    @Override
+    public int compareTo(GymDetails o) {
+        return 0;
     }
 }
 
