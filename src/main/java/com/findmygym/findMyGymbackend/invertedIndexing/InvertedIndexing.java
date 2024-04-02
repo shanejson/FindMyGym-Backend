@@ -100,6 +100,9 @@ public class InvertedIndexing {
 
         Map<String, String > citiesWithId = exctractCitiesWithId();
 
+        if(citiesWithId.isEmpty()){
+            return null;
+        }
         for (String city: citiesWithId.keySet()) {
 
             String cityName = citiesWithId.get(city);
@@ -109,8 +112,7 @@ public class InvertedIndexing {
             insertWord(cityName, objIds);
 
         }
-
-        return searchWord("windsor");
+        return searchWord(inputWord);
 
     }
 
@@ -126,7 +128,7 @@ public class InvertedIndexing {
             insertWord(cityName, objIds);
 
         }
-        return autoCompleteInternal("win");
+        return autoCompleteInternal(inputWord);
     }
 
     private List<String> getIds(Map<String, String> data ,String cityName){
@@ -142,7 +144,7 @@ public class InvertedIndexing {
     }
     public Map<String, String> exctractCitiesWithId(){
         Map<String, String> citiesWithID = new HashMap<>();
-        Path path = Paths.get("D:\\Project\\ACC project\\findMyGym-backend\\data_for_invertedIndexing.txt");
+        Path path = Paths.get("D:\\Project\\ACC project\\findMyGym2\\findMyGym-backend\\data_for_invertedIndexing.txt");
 
         try {
             List<String> lines = Files.readAllLines(path);

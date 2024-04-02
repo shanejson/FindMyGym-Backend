@@ -22,7 +22,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class wordExtractor {
-    public static void extractingWords() {
+    public static void main(String args[]) throws IOException {
+        extractingCitiesWithIds();
+    }
+    public void extractingWords() {
         try {
             // Read the JSON file into a string
             String jsonContent = new String(Files.readAllBytes(Paths.get("gymData.json")));
@@ -97,7 +100,7 @@ public class wordExtractor {
 
     }
 
-    public static void extractingProvinceCity() throws IOException {
+    public void extractingProvinceCity() throws IOException {
         // Read the JSON file
         BufferedReader br = new BufferedReader(new FileReader("gymData.json"));
 
@@ -124,7 +127,7 @@ public class wordExtractor {
         System.out.println("Province and city details have been extracted and stored in province_city_details.txt");
     }
 
-    public static void storeUserSearches(String userInput) throws IOException {
+    public void storeUserSearches(String userInput) throws IOException {
         //Check if file exists
         File file = new File("inputRecords.txt");
         if(!file.exists()){
@@ -167,10 +170,14 @@ public class wordExtractor {
         }
 
         // Write the extracted details to a text file
-        FileWriter writer = new FileWriter("data_for_invertedIndexing.txt");
-        writer.write(sb.toString());
-        writer.close();
+        try {
+            FileWriter writer = new FileWriter("data_for_invertedIndexing.txt");
+            writer.write(sb.toString());
+            writer.close();
 
-        System.out.println("city and ID details have been extracted and stored in data_for_invertedIndexing.txt");
+            System.out.println("city and ID details have been extracted and stored in data_for_invertedIndexing.txt");
+        } catch (IOException e) {
+            System.out.println("Couldnt write file");
+        }
     }
 }
