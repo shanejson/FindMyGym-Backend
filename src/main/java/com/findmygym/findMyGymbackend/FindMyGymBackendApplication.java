@@ -28,36 +28,57 @@ public class FindMyGymBackendApplication {
 	//}
 	public static void main(String[] args) throws InterruptedException, IOException {
 
-//		Scanner sc = new Scanner(System.in);
-//		System.out.println("Enter Province: ");
+	Validator Validator = new Validator();
+
+		Scanner scanner = new Scanner(System.in);
+
+//		try {
+//			System.out.print("Enter province: ");
+//			String provinceInput = scanner.nextLine(); // Read input
 //
-//		String province = sc.next();
-//		System.out.println("Province: "+ province);
-
-
-
-
+//			if(Validator.validateProvince(provinceInput)){
+//				System.out.println("Province is Valid");
+//			}else{
+//				System.out.println("Province is NOT Valid");
+//			}
+//
+//			System.out.print("Enter city: ");
+//			String cityInput = scanner.nextLine(); // Read input
+//
+//			if(Validator.validateCity(cityInput)){
+//			System.out.println("City is Valid");
+//			}else{
+//				System.out.println("City is NOT Valid");
+//			}
+//
+//		} catch (Exception e) {
+//			System.err.println("An error occurred: " + e.getMessage());
+//			e.printStackTrace();
+//		} finally {
+//			scanner.close(); // Close the scanner
+//		}
+//
 
 		//---------------------------SHANE---------------------------------
 		//Crawl Fit4Less
-		//fit4lessCrawler fit4lessCrawler = new fit4lessCrawler();
-		//fit4lessCrawler.getFit4lessDetails("Ontario", "Mississauga");
-
-		//Crawl Planet Fitness
-		//planetFitnessCrawler planetFitnessCrawler = new planetFitnessCrawler();
-		//planetFitnessCrawler.getPlanetFitnessDetails("Ontario", "Toronto");
-
-		//Crawl Goodlife Fitness
-		//goodLifeFitnessCrawler goodLifeFitnessCrawler = new goodLifeFitnessCrawler();
-		//goodLifeFitnessCrawler.getGoofLifeFitnessDetails("Ontario", "Toronto");
+		fit4lessCrawler fit4lessCrawler = new fit4lessCrawler();
+		fit4lessCrawler.getFit4lessDetails("Alberta", "Edmonton");
 
 		//Parse Fit4 Less
 		//fit4lessParser fit4lessParser = new fit4lessParser();
 		//fit4lessParser.parsefit4Less();
 
+		//Crawl Goodlife Fitness
+		//goodLifeFitnessCrawler goodLifeFitnessCrawler = new goodLifeFitnessCrawler();
+		//goodLifeFitnessCrawler.getGoofLifeFitnessDetails("Ontario", "Hamilton");
+
 		//Parse Goodlife Fitness
 		//goodLifeFitnessParser goodLifeFitnessParser = new goodLifeFitnessParser();
 		//goodLifeFitnessParser.parseGoodLifeFitness();
+
+		//Crawl Planet Fitness
+		//planetFitnessCrawler planetFitnessCrawler = new planetFitnessCrawler();
+		//planetFitnessCrawler.getPlanetFitnessDetails("Ontario", "Windsor");
 
 		//Parse Planet Fitness
 		//planetFitnessParser planetFitnessParser = new planetFitnessParser();
@@ -66,6 +87,7 @@ public class FindMyGymBackendApplication {
 		//Creating Text file
 		//wordExtractor wordExtractor = new wordExtractor();
 		//wordExtractor.extractingWords();
+
 
 		//--------------------------------------CHARANPREET-----------------------------------
 		//WordCounter
@@ -84,8 +106,8 @@ public class FindMyGymBackendApplication {
 		//SearchFrequency SearchFrequency = new SearchFrequency();
 		//SearchFrequency.searchFrequency("Toronto");
 
-		PageRanking PageRanking = new PageRanking();
-		PageRanking.PageRanker();
+		//PageRanking PageRanking = new PageRanking();
+		//PageRanking.PageRanker();
 
 
 		//--------SMIT-------------------
