@@ -33,7 +33,7 @@ public class FindMyGymBackendApplication {
 			System.out.println();
 			System.out.println("Hello user welcome to \"Find My Gym\"...");
 
-			System.out.print("Enter location: ");
+			System.out.print("Enter City (Add * at the end to get auto Complete): ");
 			Scanner scanner1 = new Scanner(System.in);
 			String location = scanner1.nextLine().toLowerCase();
 			boolean checkForAutoCompletion = utils.endsWithAsterisk(location);
@@ -127,5 +127,5 @@ public class FindMyGymBackendApplication {
 	}
 
 
-	}
+}
 
