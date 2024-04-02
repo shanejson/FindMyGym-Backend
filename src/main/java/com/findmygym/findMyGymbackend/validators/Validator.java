@@ -12,7 +12,7 @@ public class Validator {
     //VALIDATORS
 
     //Validate Province
-    public static boolean validateProvince(String province) {
+    public boolean validateProvince(String province) {
         if (province == null || province.trim().isEmpty()) {
             return false; // Input is null or empty
         }
@@ -27,7 +27,7 @@ public class Validator {
     }
 
     //Validate City
-    public static boolean validateCity(String city) {
+    public boolean validateCity(String city) {
         if (city == null || city.trim().isEmpty()) {
             return false; // Input is null or empty
         }
@@ -35,14 +35,14 @@ public class Validator {
         city = city.trim();
         // Define a regex pattern for valid province names
         //String provincePattern = "^[A-Za-z\\s-]+$";
-        String cityPattern ="^[a-zA-Z]+(?:\\*{0,1})$";
+        String cityPattern ="^[a-zA-Z]+(?:\\*{0})?$";
         Pattern pattern = Pattern.compile(cityPattern);
         Matcher matcher = pattern.matcher(city);
         return matcher.matches() && city.length() >= 2 && city.length() <= 50;
     }
 
     //Validate Gym Name
-    public static boolean validateGymName(String gymName){
+    public boolean validateGymName(String gymName){
         String regex = "\\bOpening\\b";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(gymName);
@@ -53,7 +53,7 @@ public class Validator {
         }
     }
 
-    public static boolean isValidMembershipPrice(String membershipPrice) {
+    public boolean isValidMembershipPrice(String membershipPrice) {
         // Define a regex pattern for a valid membership price format (numeric value with two decimal places)
         //String pricePattern = "^\\d+(\\.\\d{1,2})?$"; // Matches one or more digits followed by an optional decimal point and up to two decimal places
         String pricePattern = "^\\d+(\\.\\d{1,2})?$"; // Matches a whole number or a numeric value with up to two decimal places
@@ -62,7 +62,7 @@ public class Validator {
         return matcher.matches();
     }
 
-    public static void validateGymDetails(JsonObject gymDetailsObject){
+    public void validateGymDetails(JsonObject gymDetailsObject){
         System.out.println("-------->"+gymDetailsObject);
 
         // Access keys and values
@@ -74,7 +74,7 @@ public class Validator {
     }
 
     //FINDING PATTERNS
-    public static String extractMembershipDuration(String membershipDuration) {
+    public String extractMembershipDuration(String membershipDuration) {
         // Define a regex pattern to extract the membership duration
         String durationPattern = "^Every\\s+\\d+\\s+\\w+"; // Matches "Every [number] [time unit]" format
         Pattern pattern = Pattern.compile(durationPattern);
@@ -87,7 +87,7 @@ public class Validator {
     }
 
 
-    public static String extractPhoneNumber(String gymLocationPhoneElement) {
+    public String extractPhoneNumber(String gymLocationPhoneElement) {
         // Define a regex pattern to extract the phone number
         String phonePattern = "\\(\\d{3}\\)\\s*\\d{3}-\\d{4}"; // Matches phone numbers in the format (###) ###-####
         Pattern pattern = Pattern.compile(phonePattern);
@@ -99,7 +99,7 @@ public class Validator {
         }
     }
 
-    public static String[] extractAddressComponents(String gymLocationAddressElement) {
+    public String[] extractAddressComponents(String gymLocationAddressElement) {
         //String addressPattern = "(.*?)(?:,\\s*([A-Za-z ]+))?\\s*([A-Z]{2})\\s*(?:-)?\\s*([A-Z]\\d[A-Z]\\s*\\d[A-Z]\\d)$";
         //String addressPattern = "(.*?)(?:,\\s*([A-Za-z ]+))?\\s*([A-Z]{2})\\s*(?:-)?\\s*([A-Z]\\d[A-Z]\\s*\\d[A-Z]\\d)$";
         String addressPattern = "(.*?)(?:,\\s*([A-Za-z ]+))?,\\s*([A-Z]{2})\\s*(?:-)?\\s*([A-Z]\\d[A-Z]\\s*\\d[A-Z]\\d)$";
@@ -139,7 +139,7 @@ public class Validator {
         }
     }
 
-    public static String[] extractCoordinates(String gymPinLocationElement) {
+    public String[] extractCoordinates(String gymPinLocationElement) {
 
         //Define a regex pattern to extract latitude and longitude from the URL
         String coordinatesPattern = "/@(-?\\d+\\.\\d+),(-?\\d+\\.\\d+)";
@@ -154,7 +154,7 @@ public class Validator {
         }
     }
 
-    public  static String extractDuration(String duration){
+    public String extractDuration(String duration){
         String regex = "/mo";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(duration);

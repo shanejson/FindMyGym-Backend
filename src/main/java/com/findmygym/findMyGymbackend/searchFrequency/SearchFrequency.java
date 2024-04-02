@@ -5,36 +5,38 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 public class SearchFrequency {
-    public void searchFrequency(String userInput){
+    public void insertSearchFrequency(String userInput){
         //File outputFile = new File("C:\\Users\\banwa\\OneDrive\\Desktop\\ACC\\Final Project\\Spell checker.txt");
         File outputFile = new File("inputRecords.txt");
 
         if(outputFile.exists()) {
             // Reading from a text file
             try {
-                Scanner scanner = new Scanner(outputFile);
-                while (scanner.hasNext()) {
-                    String word = scanner.next();
-                    insert(word.toLowerCase()); // Convert the word to lowercase before inserting
-                }
-                scanner.close();
-            } catch (FileNotFoundException e) {
-                System.err.println("File not found: " + e.getMessage());
-                return;
+//                Scanner scanner = new Scanner(outputFile);
+//                while (scanner.hasNext()) {
+//                    String word = scanner.next();
+                insert(userInput.toLowerCase()); // Convert the word to lowercase before inserting
+//                }
+//                scanner.close();
+//            } catch (FileNotFoundException e) {
+//                System.err.println("File not found: " + e.getMessage());
+//                return;
+//            }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
-
             //String searchWord = userInput.toLowerCase(); // Convert input to lowercase
             //int frequency = search(searchWord);
             //System.out.println("The word '" + searchWord + "' appears " + frequency + " times in the list.");
 
             // Display top 10 frequencies
-            displayTopFrequencies();
+            //displayTopFrequencies();
         }else{
             System.out.println("User input record does not exist!");
         }
     }
 
-    static class TrieNode {
+    public class TrieNode {
         TrieNode[] children;
         boolean isEndOfWord;
         int frequency;
@@ -46,9 +48,9 @@ public class SearchFrequency {
         }
     }
 
-    static TrieNode root = new TrieNode(); // Initialize root here
+    public TrieNode root = new TrieNode(); // Initialize root here
 
-    static void insert(String word) {
+    private void insert(String word) {
         TrieNode curr = root;
         for (char ch : word.toCharArray()) {
             if (Character.isLetterOrDigit(ch)) {
@@ -74,7 +76,7 @@ public class SearchFrequency {
         curr.frequency++;
     }
 
-    static int search(String word) {
+    private int search(String word) {
         TrieNode curr = root;
         for (char ch : word.toCharArray()) {
             if (Character.isLetterOrDigit(ch)) {
@@ -97,7 +99,7 @@ public class SearchFrequency {
         return curr.frequency;
     }
 
-    static void displayTopFrequencies() {
+    public void displayTopFrequencies() {
         List<Map.Entry<String, Integer>> frequencyList = new ArrayList<>();
         collectFrequencies(root, "", frequencyList);
 
@@ -105,7 +107,7 @@ public class SearchFrequency {
         frequencyList.sort((a, b) -> b.getValue().compareTo(a.getValue()));
 
         // Display top 10 frequencies
-        System.out.println("\nTop 10 Frequencies:");
+        System.out.println("People also search for");
         int count = 0;
         for (Map.Entry<String, Integer> entry : frequencyList) {
             if (count < 10) {
@@ -117,7 +119,7 @@ public class SearchFrequency {
         }
     }
 
-    static void collectFrequencies(TrieNode node, String word, List<Map.Entry<String, Integer>> frequencyList) {
+    private void collectFrequencies(TrieNode node, String word, List<Map.Entry<String, Integer>> frequencyList) {
         if (node == null)
             return;
         if (node.isEndOfWord) {
@@ -129,10 +131,10 @@ public class SearchFrequency {
         }
     }
 
-    public static void main(String[] args) {
-        SearchFrequency searchFrequency = new SearchFrequency();
-        searchFrequency.searchFrequency("");//Empty string is passed to skip the word search
-    }
+//    public static void main(String[] args) {
+//        SearchFrequency searchFrequency = new SearchFrequency();
+//        searchFrequency.searchFrequency("");//Empty string is passed to skip the word search
+//    }
 
     private static String capitalizeFirstLetter(String word) {
         if (word == null || word.isEmpty()) {

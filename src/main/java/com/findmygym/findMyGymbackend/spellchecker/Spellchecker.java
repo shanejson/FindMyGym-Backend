@@ -6,22 +6,20 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-public class spellchecker {
-    public void SpellChecker(String userInput){
+public class Spellchecker {
+    public List<Map.Entry<String, Integer>> checkSpelling(String userInput){
         File outputFile = new File("locations.txt");
 
         if(outputFile.exists()){
-            System.out.println("Words List Exists!");
+
             try {
                 Set<String> words = readWordsFromFile(String.valueOf(outputFile));
 
 
                 List<Map.Entry<String, Integer>> closestWords = findClosestWords(userInput, words);
 
-                System.out.println("Did you mean:");
-                for (Map.Entry<String, Integer> entry : closestWords) {
-                    System.out.println(capitalizeFirstLetter(entry.getKey()));// + " - Edit Distance: " + entry.getValue());
-                }
+
+                return closestWords;
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
@@ -29,10 +27,12 @@ public class spellchecker {
             }
         }else{
             System.out.println("Words List Do Not Exists!");
+            return null;
         }
+        return null;
     }
 
-    public static List<Map.Entry<String, Integer>> findClosestWords(String userInput, Set<String> words) {
+    private List<Map.Entry<String, Integer>> findClosestWords(String userInput, Set<String> words) {
         Map<String, Integer> wordDistances = new HashMap<>();
         for (String word : words) {
             int distance = calculateEditDistance(userInput, word);
@@ -43,7 +43,7 @@ public class spellchecker {
         return sortedWords.subList(0, Math.min(3, sortedWords.size()));
     }
 
-    public static int calculateEditDistance(String word1, String word2) {
+    private int calculateEditDistance(String word1, String word2) {
         int[][] dp = new int[word1.length() + 1][word2.length() + 1];
 
         for (int i = 0; i <= word1.length(); i++) {
@@ -62,7 +62,7 @@ public class spellchecker {
         return dp[word1.length()][word2.length()];
     }
 
-    public static Set<String> readWordsFromFile(String filePath) throws IOException {
+    private Set<String> readWordsFromFile(String filePath) throws IOException {
         Set<String> words = new HashSet<>();
         BufferedReader reader = new BufferedReader(new FileReader(filePath));
         String line;
@@ -74,7 +74,7 @@ public class spellchecker {
         return words;
     }
 
-    private static String capitalizeFirstLetter(String word) {
+    private String capitalizeFirstLetter(String word) {
         if (word == null || word.isEmpty()) {
             return word;
         }
